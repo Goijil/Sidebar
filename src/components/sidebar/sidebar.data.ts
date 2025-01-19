@@ -7,7 +7,7 @@ import {
   SquareCheckBig,
   Users,
 } from "lucide-react";
-import { IMenuItem } from "./sidebar.types";
+import { IMenuItem } from "./types.sidebar.data";
 
 export const MENU: IMenuItem[] = [
   { icon: Home, name: "Home", link: "/" },
