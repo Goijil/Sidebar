@@ -4,6 +4,8 @@ import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { m, spring } from "framer-motion";
 import { useAtom } from "jotai";
 import { isOpenAtom } from "../../jotai/stor";
+import { Profile } from "../profile/Profile";
+import { PROFILE } from "../profile/data.profile";
 
 export function Sidebar() {
   const [isOpen, setIsOpen] = useAtom<boolean>(isOpenAtom);
@@ -32,6 +34,14 @@ export function Sidebar() {
         >
           {isOpen ? <PanelLeftOpen /> : <PanelLeftClose />}
         </button>
+        {PROFILE.map((item) => (
+          <Profile
+            email={item.email}
+            img={item.img}
+            login={item.login}
+            key={item.email}
+          />
+        ))}
         <Menu />
       </m.aside>
     </>

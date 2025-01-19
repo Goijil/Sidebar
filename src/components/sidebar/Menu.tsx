@@ -1,5 +1,5 @@
 import { MenuItem } from "./MenuItem";
-import { MENU } from "./sidebar.data";
+import { MENU } from "./data.sidebar";
 
 export function Menu() {
   return (
