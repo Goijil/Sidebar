@@ -18,6 +18,7 @@ export function MenuItem({ item }: { item: IMenuItem }) {
         <span className="flex items-center p-4 hover:bg-zinc-500 hover:rounded-md overflow-hidden">
           <item.icon className="shrink-0 w-6 h-6 mr-4" />
           <PrintDelText text={item.name} key={1} />
+          {/* {item.name} */}
         </span>
       </a>
     </>

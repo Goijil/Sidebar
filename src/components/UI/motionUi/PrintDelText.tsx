@@ -5,20 +5,26 @@ import { m } from "framer-motion";
 export function PrintDelText({ text }: { text: string }) {
   const isOpen = useAtomValue(isOpenAtom);
 
+  const maxI = (text: string, i: number, totalDuration: number): number => {
+    // totalDuration Общее время выполнения анимации
+    const interval = totalDuration / text.length; // Интервал между буквами
+    return i * interval;
+  };
+
   return (
     <>
       {isOpen ? (
-        // Когда меню открыто: анимация появления текста
+        // Анимация появления текста
         <>
           {text.split("").map((letter, index) => (
             <m.span
               key={index}
-              initial={{ opacity: 0 }} // Начальное состояние: буква размыта и прозрачна
-              animate={{ opacity: 1 }} // Конечное состояние: буква четкая и видимая
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{
-                delay: index * 0.03, // Задержка между буквами, чтобы появлялись поочередно
-                duration: 0.15, // Длительность анимации каждой буквы
-                ease: "linear", // Плавность анимации
+                delay: maxI(text, index, 0.33), // Равномерная задержка
+                // duration: 0.3, // Длительность анимации каждой буквы
+                ease: "easeOut",
               }}
             >
               {letter}
@@ -26,17 +32,17 @@ export function PrintDelText({ text }: { text: string }) {
           ))}
         </>
       ) : (
-        // Когда меню закрыто: анимация исчезновения текста
+        // Анимация исчезновения текста
         <>
           {text.split("").map((letter, index) => (
             <m.span
               key={index}
-              initial={{ opacity: 1 }} // Начальное состояние: буква четкая и видимая
-              animate={{ opacity: 0 }} // Конечное состояние: буква размыта и исчезает
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 0 }}
               transition={{
-                delay: (text.length - 1 - index) * 0.02, // Задержка между буквами в обратном порядке
-                duration: 0.15, // Длительность анимации каждой буквы
-                ease: "linear", // Плавность анимации
+                delay: maxI(text, text.length - 1 - index, 0.33), // Равномерная задержка
+                // duration: 0.3,
+                ease: "easeOut",
               }}
             >
               {letter}

@@ -20,13 +20,27 @@ export function Sidebar() {
     e.stopPropagation(); // Останавливаем всплытие клика
     toggleSidebar();
   };
+
+  const m_aside = {
+    type: spring,
+    stiffness: 220,
+    damping: 24,
+    mass: 1.6,
+    ...(!isOpen && { delay: 0.2 }),
+    // when: "beforeChildren",
+    // delay: 0.3,
+    ease: "easeOut",
+    // bounce: 0.4,
+  };
   return (
     <>
       <m.aside
         ref={ref}
         className="fixed text-white text-lg mt-4 ml-4 w-52 bg-zinc-600 shadow-lg rounded-md "
         animate={{ width: isOpen ? 208 : 56 }}
-        transition={{ type: spring, stiffness: 180, damping: 18 }}
+        drag
+        // dragTransition={{ power: 0.1, timeConstant: 900 }}
+        transition={m_aside}
       >
         <button
           className="absolute w-12 h-12 -right-12 flex justify-center items-center opacity-50 hover:opacity-100 duration-300"
@@ -34,15 +48,17 @@ export function Sidebar() {
         >
           {isOpen ? <PanelLeftOpen /> : <PanelLeftClose />}
         </button>
-        {PROFILE.map((item) => (
-          <Profile
-            email={item.email}
-            img={item.img}
-            login={item.login}
-            key={item.email}
-          />
-        ))}
-        <Menu />
+        <div>
+          {PROFILE.map((item) => (
+            <Profile
+              email={item.email}
+              img={item.img}
+              login={item.login}
+              key={item.email}
+            />
+          ))}
+          <Menu />
+        </div>
       </m.aside>
     </>
   );
