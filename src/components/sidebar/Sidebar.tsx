@@ -23,10 +23,10 @@ export function Sidebar() {
 
   const m_aside = {
     type: spring,
-    stiffness: 220,
-    damping: 24,
-    mass: 1.6,
-    ...(!isOpen && { delay: 0.2 }),
+    stiffness: 160,
+    damping: 25,
+    mass: 2,
+    // ...(!isOpen && { delay: 0.2 }),
     // when: "beforeChildren",
     // delay: 0.3,
     ease: "easeOut",
